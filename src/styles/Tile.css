@@ -1,0 +1,20 @@
+.tile {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.tile:hover {
+    background-color: #ccc;
+}
+
+.tile:empty {
+    background-color: transparent;
+}
