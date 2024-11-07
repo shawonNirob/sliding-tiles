@@ -1,11 +1,11 @@
 .tile {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background-color: #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
@@ -15,6 +15,12 @@
     background-color: #ccc;
 }
 
-.tile:empty {
+.tile.empty {
     background-color: transparent;
+    cursor: default;
+}
+
+.tile.disabled {
+    /*opacity: 1; */ /* Makes the tile appear faded */
+    cursor: not-allowed; /* Changes cursor to indicate non-interactive */
 }

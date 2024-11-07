@@ -1,25 +1,27 @@
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
     gap: 5px;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .tile {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    font-size: 2rem;
+    width: 150px;
+    height: 150px;
+    background-color: #ff1a1a;
+    border: 10px solid #ea9308;
+    font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
 }
 
 .tile.empty {
-    background-color: transparent;
+    background-color: #ea9308;
     border: none;
+    cursor: default;
 }

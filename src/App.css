@@ -5,42 +5,21 @@
   align-items: center;
   justify-content: flex-start;
   height: 100vh; /* Take up full height of the screen */
-  margin: 0;
-  padding: 20px; /* Add padding to avoid content sticking to the edges */
+  margin: 0; /* Remove any default margin */
+  padding: 20px;
+  padding-top: 80px; /* Add some padding to avoid overlap with fixed header */
 }
+
 
 h1 {
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 20px; /* Space between the title and the game board */
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.board {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
-  margin-top: 10px; /* To make sure board isn't too far from the title */
-}
-
-.tile {
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
-  font-size: 2rem;
-  cursor: pointer;
-  border: 1px solid #ddd;
-}
-
-.tile:empty {
-  background-color: #fff;
-  cursor: not-allowed;
-}
-
-.timer {
-  margin-top: 20px;
-  font-size: 1.5rem;
+.board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* To ensure the board isn't too close to the title */
 }

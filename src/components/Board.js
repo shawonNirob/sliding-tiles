@@ -2,26 +2,29 @@ import React, { useState, useEffect } from 'react';
 import Tile from './Tile';
 import '../styles/Board.css';
 
-const Board = () => {
+const Board = ({ startGame, onGameWon, isGameOver }) => {
     const [tiles, setTiles] = useState([]);
-    const [emptyIndex, setEmptyIndex] = useState(0);
+    const [emptyIndex, setEmptyIndex] = useState(8); // Initially, the last tile is empty
 
     useEffect(() => {
-        // Initialize the tiles in a random solvable state
-        const initialTiles = generateSolvableTiles();
-        setTiles(initialTiles);
-        setEmptyIndex(initialTiles.indexOf(0)); // Empty space is represented by '0'
-    }, []);
+        if (startGame) {
+            // Shuffle the tiles when the game starts
+            const shuffledTiles = generateSolvableTiles();
+            setTiles(shuffledTiles);
+            setEmptyIndex(shuffledTiles.indexOf(0));
+        } else {
+            // Initialize to solved state
+            const solvedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+            setTiles(solvedTiles);
+            setEmptyIndex(8);
+        }
+    }, [startGame]);
 
     const generateSolvableTiles = () => {
-        let tiles = Array.from({ length: 9 }, (_, i) => (i + 1) % 9); // Creates an array [1, 2, 3, 4, 5, 6, 7, 8, 0]
+        let tiles = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]);
         
-        // Shuffle tiles randomly
-        tiles = shuffle(tiles);
-        
-        // Ensure the shuffled tiles are solvable
-        if (!isSolvable(tiles)) {
-            return generateSolvableTiles(); // Retry if not solvable
+        while (!isSolvable(tiles)) {
+            tiles = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]);
         }
 
         return tiles;
@@ -36,9 +39,8 @@ const Board = () => {
     };
 
     const isSolvable = (tiles) => {
-        // Check if the shuffled tiles are solvable (this is a basic solvability check for a 3x3 puzzle)
         const inversions = countInversions(tiles);
-        return inversions % 2 === 0; // Puzzle is solvable if inversions are even
+        return inversions % 2 === 0;
     };
 
     const countInversions = (tiles) => {
@@ -54,7 +56,8 @@ const Board = () => {
     };
 
     const handleTileClick = (index) => {
-        // Check if the clicked tile is adjacent to the empty space
+        if (!startGame) return; // Prevent tile moves before game starts
+
         const adjacentIndices = [
             emptyIndex - 1, // Left
             emptyIndex + 1, // Right
@@ -63,27 +66,38 @@ const Board = () => {
         ];
 
         if (adjacentIndices.includes(index) && isValidMove(index)) {
-            // Swap tiles
             const newTiles = [...tiles];
             [newTiles[emptyIndex], newTiles[index]] = [newTiles[index], newTiles[emptyIndex]];
             setTiles(newTiles);
             setEmptyIndex(index);
+
+            if (isSolved(newTiles) && startGame) {
+                onGameWon();
+            }
         }
     };
 
     const isValidMove = (index) => {
-        // Ensure tile stays within bounds of the board
         const row = Math.floor(index / 3);
         const emptyRow = Math.floor(emptyIndex / 3);
-
-        // Check if the tile is in the same row or adjacent row
         return Math.abs(row - emptyRow) <= 1;
+    };
+
+    const isSolved = (tiles) => {
+        const solvedState = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+        return tiles.every((tile, index) => tile === solvedState[index]);
     };
 
     return (
         <div className="board">
             {tiles.map((number, index) => (
-                <Tile key={index} number={number ? number : ''} onClick={() => handleTileClick(index)} />
+                <Tile
+                    key={index}
+                    number={number ? number : ''}
+                    onClick={() => handleTileClick(index)}
+                    isEmpty={number === 0}
+                    isClickable={startGame} // Pass down the status
+                />
             ))}
         </div>
     );

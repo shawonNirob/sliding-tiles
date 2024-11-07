@@ -1,46 +1,66 @@
 import { useState, useEffect } from 'react';
 
+// Format the time to mm:ss format
 const formatTime = (time) => {
-    const hours = String(Math.floor(time / 3600)).padStart(2, '0');
-    const minutes = String(Math.floor((time % 3600) / 60)).padStart(2, '0');
+    const minutes = String(Math.floor(time / 60)).padStart(2, '0');
     const seconds = String(time % 60).padStart(2, '0');
-    return `${hours}:${minutes}:${seconds}`;
+    return `${minutes}:${seconds}`;
 };
 
 const useTimer = () => {
-    const [time, setTime] = useState(0);
-    const [isRunning, setIsRunning] = useState(true);
-    const [isGameOver, setIsGameOver] = useState(false);
+    const initialTime = 10; // 5 minutes in seconds
+    const [time, setTime] = useState(initialTime); // Track remaining time
+    const [isRunning, setIsRunning] = useState(false); // Initialize to false
+    const [isGameOver, setIsGameOver] = useState(false); // Track if the game is over
 
     useEffect(() => {
-        if (!isRunning) return;
+        if (!isRunning || isGameOver) return; // Don't start the timer if not running or game is over
 
         const timerId = setInterval(() => {
             setTime((prevTime) => {
-                const newTime = prevTime + 1;
+                const newTime = prevTime - 1;
 
-                if (newTime >= 300) { // 5 minutes = 300 seconds
-                    setIsGameOver(true);
-                    setIsRunning(false);
+                // Check if the timer has reached 0
+                if (newTime <= 0) {
+                    setIsGameOver(true); // Trigger game over
+                    setIsRunning(false); // Stop the timer
+                    return 0; // Ensure time doesn't go negative
                 }
 
                 return newTime;
             });
         }, 1000);
 
-        return () => clearInterval(timerId);
-    }, [isRunning]);
+        return () => clearInterval(timerId); // Cleanup on unmount or when dependencies change
+    }, [isRunning, isGameOver]);
 
+    // Function to start the timer
+    const startTimer = () => {
+        if (!isGameOver && time > 0) {
+            setIsRunning(true);
+        }
+    };
+
+    // Function to stop the timer
+    const stopTimer = () => {
+        setIsRunning(false);
+    };
+
+    // Reset the timer
     const resetTimer = () => {
-        setTime(0);
-        setIsRunning(true);
-        setIsGameOver(false);
+        setTime(initialTime);
+        setIsRunning(false);
+        setIsGameOver(false); // Reset game over flag
     };
 
     return {
         time: formatTime(time),
+        rawTime: time, // Expose raw time if needed elsewhere
         isGameOver,
         resetTimer,
+        startTimer,
+        stopTimer,
+        isRunning,
     };
 };
 

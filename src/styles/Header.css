@@ -1,0 +1,77 @@
+/* src/styles/Header.css */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Aligns title to left and timer to right */
+    align-items: center; /* Vertically centers the items */
+    padding: 5px 20px; /* Maintains the current height with minimal padding */
+    background-color: #3db841;
+    color: white;
+    font-size: 1.6rem; /* Maintains font size */
+    position: fixed;
+    top: 0;
+    left: 0; /* Aligns header to the left edge */
+    width: 100%; /* Spans the full width of the viewport */
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.header-title {
+    font-weight: bold;
+    font-size: 1.8rem; /* Slightly increased for prominence */
+    margin: 0; /* Removes default margins */
+}
+
+.header-timer {
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 4px 10px; /* Maintains minimal padding */
+    border-radius: 5px;
+    background-color: #3db841;
+    color: white;
+}
+
+.header-buttons {
+    display: flex; /* Ensures buttons are in a row */
+    align-items: center; /* Vertically centers the buttons */
+}
+
+.header-button {
+    display: flex; /* Enables flex layout for icon and text */
+    align-items: center; /* Vertically centers icon and text */
+    padding: 1px 10px; /* Adjusted padding for balanced look */
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: #3db841;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px; /* Adds space between buttons if multiple exist */
+    transition: background-color 0.3s;
+}
+
+.header-button:hover {
+    background-color: #3db841;
+}
+
+.button-icon {
+    margin-right: 10px; /* Spaces the icon from the text */
+    font-size: 2.0rem; /* Adjusts icon size */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start; /* Aligns items to the start on smaller screens */
+        padding: 5px 10px; /* Further reduced padding on small screens */
+    }
+
+    .header-title {
+        font-size: 1.4rem; /* Reduced font size for smaller screens */
+        margin-bottom: 5px;
+    }
+
+    .header-timer {
+        font-size: 1.4rem;
+    }
+}

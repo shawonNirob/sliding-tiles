@@ -1,9 +1,12 @@
 import React from 'react';
 import '../styles/Tile.css';
 
-const Tile = ({ number, onClick }) => {
+const Tile = ({ number, onClick, isEmpty, isClickable }) => {
     return (
-        <div className={`tile ${number === '' ? 'empty' : ''}`} onClick={onClick}>
+        <div
+            className={`tile ${isEmpty ? 'empty' : ''} ${!isClickable ? 'disabled' : ''}`}
+            onClick={isEmpty || !isClickable ? null : onClick}
+        >
             {number}
         </div>
     );
