@@ -14,11 +14,12 @@
 
 ## Screenshots
 
-![alt text](1.png)
-![alt text](2.png) 
-![alt text](3.png) 
-![alt text](4.png) 
-![alt text](5.png)
+![alt text](Play.png) 
+![alt text](GameStarted.png) 
+![alt text](GameWon.png) 
+![alt text](FinishToRestart.png) 
+![alt text](GameOver.png)
+
 
 ## Installation & Setup
 
@@ -30,7 +31,7 @@ Ensure you have the following installed on your machine:
 - **[Docker](https://www.docker.com/get-started)** (version 20.10 or higher)
 - **[Docker Compose](https://docs.docker.com/compose/install/)** (comes bundled with Docker Desktop)
 
-### 🔧 Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/shawonNirob/sliding-tiles
@@ -71,7 +72,7 @@ docker-compose down
 
 This command stops and removes the containers, networks, and other resources defined in the `docker-compose.yml`.
 
-### 🧹 Optional: Rebuild the Containers
+### Optional: Rebuild the Containers
 
 If you make changes to the Dockerfile or want to rebuild the containers for any reason, use:
 
@@ -176,6 +177,6 @@ Contributions are welcome! Follow these steps to contribute:
 5. **Open a Pull Request**
 
 
-## 📧 Contact
+## Contact
 
 Have questions or suggestions? Reach out to me at [LinkedIn](https://www.linkedin.com/in/shawon-sarowar/).
