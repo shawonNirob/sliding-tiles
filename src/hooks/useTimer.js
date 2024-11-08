@@ -8,7 +8,7 @@ const formatTime = (time) => {
 };
 
 const useTimer = () => {
-    const initialTime = 10; // 5 minutes in seconds
+    const initialTime = 180; // 3 minutes in seconds
     const [time, setTime] = useState(initialTime); // Track remaining time
     const [isRunning, setIsRunning] = useState(false); // Initialize to false
     const [isGameOver, setIsGameOver] = useState(false); // Track if the game is over

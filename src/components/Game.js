@@ -8,17 +8,23 @@ const Game = () => {
     const { time, isGameOver, resetTimer, startTimer, stopTimer } = useTimer();
     const [isGameStarted, setIsGameStarted] = useState(false);
     const [isGameWon, setIsGameWon] = useState(false);
-
-    const handleStartOver = () => {
-        resetTimer();
-        setIsGameStarted(false);
-        setIsGameWon(false);
-    };
+    const [gameKey, setGameKey] = useState(0); // State for remounting Board
+    const [shouldStartTimer, setShouldStartTimer] = useState(false); // New state variable
 
     const handleStartGame = () => {
         setIsGameStarted(true);
         setIsGameWon(false);
-        startTimer();
+        resetTimer(); // Ensure timer is reset before starting
+        setShouldStartTimer(true); // Indicate that the timer should start
+        setGameKey(prevKey => prevKey + 1); // Remount Board
+    };
+
+    const handleRestartGame = () => {
+        if (!isGameOver && !isGameWon) return; // Prevent restart if game isn't over or won
+        setIsGameWon(false);
+        resetTimer();
+        setShouldStartTimer(true); // Indicate that the timer should start after restart
+        setGameKey(prevKey => prevKey + 1); // Remount Board
     };
 
     const handleGameWon = () => {
@@ -26,10 +32,17 @@ const Game = () => {
         stopTimer();
     };
 
+    // useEffect to start the timer after state updates
+    useEffect(() => {
+        if (shouldStartTimer && !isGameOver && !isGameWon) {
+            startTimer();
+            setShouldStartTimer(false); // Reset the flag
+        }
+    }, [shouldStartTimer, isGameOver, isGameWon, startTimer]);
+
     useEffect(() => {
         if (isGameOver) {
             stopTimer();
-            setIsGameStarted(false);
         }
     }, [isGameOver, stopTimer]);
 
@@ -42,12 +55,18 @@ const Game = () => {
                 isGameOver={isGameOver}
                 isGameWon={isGameWon}
                 onStartGame={handleStartGame}
-                onStartOver={handleStartOver}
+                onRestartGame={handleRestartGame} // Pass the restart handler
             />
 
             <div className="game-board">
-                {/* Display the board in a solved state or shuffled based on isGameStarted */}
-                <Board startGame={isGameStarted} onGameWon={handleGameWon} />
+                {/* Display the board, force remount with key */}
+                <Board 
+                    key={gameKey}
+                    startGame={isGameStarted} 
+                    isGameOver={isGameOver}
+                    isGameWon={isGameWon} // Ensure isGameWon is passed
+                    onGameWon={handleGameWon} 
+                />
             </div>
 
             {/* Show congratulations message if the game is won */}

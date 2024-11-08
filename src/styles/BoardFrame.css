@@ -1,0 +1,37 @@
+/* src/styles/BoardFrame.css */
+
+.board-frame {
+    position: relative;
+    width: 480px;
+    height: 480px;
+    padding: 0px;
+    background-color: #05ced2; /* Background color inside the frame */
+    border: 10px solid hsl(173, 84%, 41%); /* Colored border */
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+    margin: 0 auto;
+    background-image: linear-gradient(145deg, #05ced2, #46c4c3); /* Subtle gradient */
+    background-size: cover;
+}
+
+.board-frame::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 5px solid #0f9c9c; /* Darker border for depth */
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Inner shadow for realism */
+    pointer-events: none; /* Allows clicks to pass through */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .board-frame {
+        width: 90%;
+        height: 90%;
+        padding: 10px;
+    }
+} 
