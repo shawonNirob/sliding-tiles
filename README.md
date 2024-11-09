@@ -18,6 +18,7 @@
 ![alt text](<Responsive Adjustment Mobile.png>)
 
 
+
 ## Installation & Setup
 
 ### Prerequisites
