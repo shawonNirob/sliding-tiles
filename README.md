@@ -14,11 +14,8 @@
 
 ## Screenshots
 
-![alt text](Play.png) 
-![alt text](GameStarted.png) 
-![alt text](GameWon.png) 
-![alt text](FinishToRestart.png) 
-![alt text](GameOver.png)
+![alt text](Play.png)
+![alt text](<Responsive Adjustment Mobile.png>)
 
 
 ## Installation & Setup

@@ -33,24 +33,24 @@
 .header-buttons {
     display: flex; /* Ensures buttons are in a row */
     align-items: center; /* Vertically centers the buttons */
+    gap: 10px; /* Adds space between buttons */
 }
 
 .header-button {
     display: flex; /* Enables flex layout for icon and text */
     align-items: center; /* Vertically centers icon and text */
-    padding: 1px 10px; /* Adjusted padding for balanced look */
+    padding: 0.5rem 1rem; /* Adjusted padding for balanced look */
     font-size: 1.5rem;
     cursor: pointer;
     background-color: #3db841;
     color: white;
     border: none;
     border-radius: 5px;
-    margin: 0 5px; /* Adds space between buttons if multiple exist */
     transition: background-color 0.3s;
 }
 
 .header-button:hover {
-    background-color: #3db841;
+    background-color: #3db841; /* Darker shade on hover */
 }
 
 .button-icon {
@@ -59,7 +59,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .header-container {
         flex-direction: column;
         align-items: flex-start; /* Aligns items to the start on smaller screens */
@@ -69,9 +69,72 @@
     .header-title {
         font-size: 1.4rem; /* Reduced font size for smaller screens */
         margin-bottom: 5px;
+        text-align: center;
+        width: 100%;
     }
 
     .header-timer {
         font-size: 1.4rem;
+        margin-top: auto; /* Pushes it to the bottom of the flex container */
+        text-align: center; /* Center the timer horizontally */
+        padding: 10px;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .header-buttons {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .header-button {
+        flex: 1; /* Allow buttons to take up available space */
+        justify-content: center;
+    }
+}
+
+/* Responsive Adjustments for Mobile Devices */
+@media (max-width: 480px) {
+    .header-container {
+        flex-direction: column; /* Stacks elements vertically */
+        align-items: stretch; /* Aligns items to stretch across the container */
+        padding: 8px 10px; /* Further reduced padding */
+    }
+
+    .header-title {
+        font-size: 1.5rem; /* Reduced font size for smaller screens */
+        margin-bottom: 8px;
+        text-align: center; /* Centers the title */
+        width: 100%; /* Ensures title takes full width */
+    }
+
+    .header-buttons {
+        display: flex;
+        justify-content: space-between; /* Distributes buttons evenly */
+        gap: 5px; /* Reduced gap between buttons */
+        margin-top: 8px; /* Adds spacing above buttons */
+        width: 100%; /* Ensures buttons take full width */
+    }
+
+    .header-button {
+        flex: 1; /* Allows buttons to take up equal space */
+        justify-content: center; /* Centers content within buttons */
+        padding: 0.4rem 0.8rem; /* Adjusted padding for smaller screens */
+        font-size: 1.2rem; /* Reduced font size */
+    }
+
+    .header-timer {
+        font-size: 1.4rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .button-icon {
+        margin-right: 5px;
+        font-size: 1.5rem;
     }
 }

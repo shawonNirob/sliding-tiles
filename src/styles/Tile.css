@@ -10,11 +10,14 @@
     font-weight: bold;
     cursor: pointer;
     border-radius: 10px;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, font-size 0.3s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     background-image: linear-gradient(135deg, #ff1a1a, #ff4d4d);
     background-size: cover;
     position: relative;
+    user-select: none;
+    min-width: 60px;
+    min-height: 60px;
 }
 
 .tile::after {
@@ -43,13 +46,30 @@
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
+.tile:active:not(.disabled):not(.empty) {
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .tile:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .tile {
-        font-size: 1.8rem;
+        font-size: 2rem;
+        border: 5px solid #ea9308;
+        min-width: 50px;
+        min-height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tile {
+        font-size: 1.5rem;
+        border: 3px solid #ea9308;
+        min-width: 40px;
+        min-height: 40px;
     }
 }

@@ -2,36 +2,74 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 00px;
+    gap: 5px;
     width: 100%;
     height: 100%;
-    padding: 0px;
+    padding: 0;
     box-sizing: border-box;
+    background-color: #05ced2;
+    border-radius: 10px;
+    transition: gap 0.3s ease, padding 0.3s ease;
+
+    /* Ensure grid items scale properly */
+    grid-auto-flow: dense;
 }
 
 .tile {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
     background-color: #ff1a1a;
     border: 10px solid #ea9308;
     font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, font-size 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(135deg, #ff1a1a, #ff4d4d);
+    background-size: cover;
+    position: relative;
+    user-select: none;
+    min-width: 60px;
+    min-height: 60px;
 }
 
 .tile.empty {
     background-color: #ea9308;
     border: none;
     cursor: default;
+    box-shadow: none;
+    background-image: none;
 }
 
 /* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .board {
         gap: 5px;
+        padding: 10px;
+    }
+
+    .tile {
+        font-size: 2rem;
+        border: 9px solid #ea9308;
+        min-width: 50px;
+        min-height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .board {
+        gap: 3px;
         padding: 5px;
+    }
+
+    .tile {
+        font-size: 1.5rem;
+        border: 7px solid #ea9308;
+        min-width: 40px;
+        min-height: 40px;
     }
 }
