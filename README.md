@@ -1,6 +1,6 @@
 # Sliding Tiles Game
 
-## 🎮 Game Description
+## Game Description
 
 **Sliding Tiles Game** is a classic puzzle built with **React**. The objective is simple yet challenging: arrange the numbered tiles in sequential order by sliding them into the empty space. Test your problem-solving skills and enjoy an engaging, responsive gaming experience across all your devices!
 
